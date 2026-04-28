@@ -1,0 +1,18 @@
+{
+  "repos": [
+    { "folder_path": "/Users/willhart/src/seer-app/app", "language": "JS" },
+    {
+      "folder_path": "/Users/willhart/src/seer-app/app-legacy",
+      "language": "JS"
+    },
+    { "folder_path": "/Users/willhart/src/seer-api", "language": "JS" },
+    {
+      "folder_path": "/Users/willhart/src/seer-cognito-auth",
+      "language": "JS"
+    },
+    {
+      "folder_path": "/Users/willhart/src/hubcap",
+      "language": "Rust"
+    }
+  ]
+}

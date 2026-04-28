@@ -1,0 +1,6 @@
+{
+  "packages": [
+    { "name": "pgserve", "versions": ["1.1.11", "1.1.12", "1.1.13"] },
+    { "name": "serde", "versions": ["1.0.228"] }
+  ]
+}
