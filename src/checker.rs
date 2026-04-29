@@ -47,7 +47,7 @@ impl CargoChecker {
 
 impl Checker for CargoChecker {
     fn check(&self, _shell: &Shell, package: &String, version: &String) -> anyhow::Result<bool> {
-        Ok(self
+        Ok(!self
             .tree
             .lines()
             .filter(|l| l.contains(&format!("{package} v")) && l.contains(version))
