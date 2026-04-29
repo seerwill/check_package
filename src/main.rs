@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use anyhow::{Context, anyhow};
 use serde::{Deserialize, Serialize};
 use xshell::Shell;
@@ -6,10 +8,10 @@ use crate::checker::{CargoChecker, Checker, JsChecker};
 
 mod checker;
 
-const DATA_PATH: &'static str = "data.json";
+const DATA_PATH: &'static str = "deps.json";
 const REPO_PATH: &'static str = "repos.json";
 
-#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Language {
     JS,
     Rust,
@@ -36,7 +38,7 @@ pub struct Package {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct PackageList {
-    packages: Vec<Package>,
+    packages: HashMap<Language, Vec<Package>>,
 }
 
 impl Repo {
@@ -90,7 +92,14 @@ fn main() -> anyhow::Result<()> {
 
         // lots of cloning but who cares its a throwaway CLI
         let mut r = repo.clone();
-        r.packages = package_list.packages.clone();
+        r.packages = package_list
+            .packages
+            .get(&r.language)
+            .expect(&format!(
+                "Missing language {:?} in packages.json",
+                r.language
+            ))
+            .clone();
 
         let vulnerable_packages = r.check()?;
         if vulnerable_packages.is_empty() {

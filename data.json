@@ -1,9 +1,0 @@
-{
-  "packages": [
-    { "name": "pgserve", "versions": ["1.1.11", "1.1.12", "1.1.13"] },
-    { "name": "mbt", "versions": ["1.2.48"] },
-    { "name": "@cap-js/sqlite", "versions": ["2.2.2"] },
-    { "name": "@cap-js/postgres", "versions": ["2.2.2"] },
-    { "name": "@cap-js/db-service", "versions": ["2.2.2"] }
-  ]
-}
