@@ -1,0 +1,33 @@
+{
+  "repos": [
+    { "folder_path": "/Users/willhart/src/seer-app/app", "language": "JS" },
+    {
+      "folder_path": "/Users/willhart/src/seer-app/app-legacy",
+      "language": "JS"
+    },
+    { "folder_path": "/Users/willhart/src/seer-design", "language": "JS" },
+    { "folder_path": "/Users/willhart/src/seer-api", "language": "JS" },
+    {
+      "folder_path": "/Users/willhart/src/seer-api-events/apps/hubUpdater",
+      "language": "JS"
+    },
+    {
+      "folder_path": "/Users/willhart/src/seer-api-events/apps/referralStatusUpdator",
+      "language": "JS"
+    },
+    {
+      "folder_path": "/Users/willhart/src/seer-api-events/apps/signUrls",
+      "language": "JS"
+    },
+    {
+      "folder_path": "/Users/willhart/src/seer-api-events/apps/touchpoints",
+      "language": "JS"
+    },
+    {
+      "folder_path": "/Users/willhart/src/seer-cognito-auth",
+      "language": "JS"
+    },
+    { "folder_path": "/Users/willhart/src/seer-docs", "language": "JS" },
+    { "folder_path": "/Users/willhart/src/seer-web", "language": "JS" }
+  ]
+}
