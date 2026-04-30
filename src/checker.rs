@@ -1,15 +1,17 @@
 use anyhow::anyhow;
+use regex::Regex;
+use semver::VersionReq;
 use xshell::{Shell, cmd};
 
 pub trait Checker {
-    fn check(&self, shell: &Shell, package: &String, version: &String) -> anyhow::Result<bool>;
+    fn check(&self, shell: &Shell, package: &String, version: &VersionReq) -> anyhow::Result<bool>;
 }
 
 #[derive(Default)]
 pub struct JsChecker;
 
 impl Checker for JsChecker {
-    fn check(&self, shell: &Shell, package: &String, version: &String) -> anyhow::Result<bool> {
+    fn check(&self, shell: &Shell, package: &String, version: &VersionReq) -> anyhow::Result<bool> {
         let command = cmd!(shell, "yarn why {package}");
 
         match command.output() {
@@ -46,7 +48,12 @@ impl CargoChecker {
 }
 
 impl Checker for CargoChecker {
-    fn check(&self, _shell: &Shell, package: &String, version: &String) -> anyhow::Result<bool> {
+    fn check(
+        &self,
+        _shell: &Shell,
+        package: &String,
+        version: &VersionReq,
+    ) -> anyhow::Result<bool> {
         Ok(!self
             .tree
             .lines()

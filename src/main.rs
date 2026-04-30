@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use anyhow::{Context, anyhow};
+use semver::VersionReq;
 use serde::{Deserialize, Serialize};
 use xshell::Shell;
 
@@ -33,7 +34,7 @@ pub struct RepoList {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Package {
     pub name: String,
-    pub versions: Vec<String>,
+    pub versions: Vec<VersionReq>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
