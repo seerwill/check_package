@@ -6,7 +6,7 @@
       { "name": "@cap-js/sqlite", "versions": ["2.2.2"] },
       { "name": "@cap-js/postgres", "versions": ["2.2.2"] },
       { "name": "@cap-js/db-service", "versions": ["2.2.2"] },
-      { "name": "tanstack", versions: ["*"] }
+      { "name": "tanstack", "versions": ["*"] }
     ],
     "Rust": []
   }

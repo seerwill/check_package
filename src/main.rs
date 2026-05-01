@@ -44,12 +44,14 @@ pub struct PackageList {
 
 impl Repo {
     pub fn check(&self) -> anyhow::Result<Vec<String>> {
-        let sh = Shell::new()?;
+        let sh = Shell::new().context("create new main shell")?;
         sh.change_dir(&self.folder_path);
 
         let checker: Box<dyn Checker> = match self.language {
             Language::JS => Box::new(JsChecker::default()),
-            Language::Rust => Box::new(CargoChecker::new(&self.folder_path)?),
+            Language::Rust => Box::new(
+                CargoChecker::new(&self.folder_path).context("create CargoChecker from folder")?,
+            ),
         };
 
         Ok(self
@@ -81,10 +83,12 @@ impl Repo {
 fn main() -> anyhow::Result<()> {
     let repo_list = serde_json::from_str::<RepoList>(
         &std::fs::read_to_string(REPO_PATH).context("Find repo file")?,
-    )?;
+    )
+    .context("load repo file")?;
     let package_list = serde_json::from_str::<PackageList>(
         &std::fs::read_to_string(DATA_PATH).context("Find data file")?,
-    )?;
+    )
+    .context("load package list")?;
 
     let mut found_bad = false;
 
@@ -102,7 +106,10 @@ fn main() -> anyhow::Result<()> {
             ))
             .clone();
 
-        let vulnerable_packages = r.check()?;
+        let vulnerable_packages = r.check().context(format!(
+            "check for vulnerable packages in {}",
+            r.folder_path
+        ))?;
         if vulnerable_packages.is_empty() {
             println!("    no vulnerable package versions found");
         } else {
